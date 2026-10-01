@@ -29,3 +29,23 @@ Its central direction/removal signs recur, but only the SAC-D30 joint pattern
 passes both corrected tests. The scale experiment remains a development test
 on previously exposed states. This deposit is not a universal-superiority claim,
 an independently replicated optimization campaign or a journal acceptance claim.
+
+## Terminal particle-credit evidence
+
+[Download terminal-credit version 1](https://github.com/redeem123/PWA-component-evidence/releases/tag/terminal-credit-evidence-v1).
+
+Archive SHA-256
+
+`6948c591c791a570f1abe399537f90ed736556880083860a5942d7dee893e983`
+
+The 51 KB package adds all 1,160 terminal-credit labels and the 290 held-out
+decisions. It includes saved predictions, pre-update rank summaries and four
+training-mean switches, not fitted model parameters. A Python 3.10-or-later
+standard-library reader reconstructs all five controls, complete strata and
+function means, four failed category checks and the individual/swarm sign matrix.
+It exports eight CSV files through `python3 -I reader.py --tables-output ../tables`.
+
+Every favorable, harmful, zero and no-motion label is retained. The public reader
+checks decisions from saved predictions, not model fitting or trajectories.
+No benchmark assets, checkpoints, raw states or private source history are included.
+The archive README supplies CC BY 4.0 outcome terms and MIT reader terms.
