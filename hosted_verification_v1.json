@@ -1,0 +1,223 @@
+{
+  "authenticatedDownloads": false,
+  "authorHost": false,
+  "benchmarkRuntime": false,
+  "csvTables": 18,
+  "freshEnvironment": true,
+  "helperSha256": "f6cbd7270fe709869189521060ff5e8534c3cd53c2d50881b329e594e95f80ba",
+  "independentScientificReplication": false,
+  "numpy": "2.2.6",
+  "numpyWheelSha256": "fd83c01228a688733f1ded5201c678f0c53ecc1006ffbc404db9f7a899ac6249",
+  "objectiveCalls": 0,
+  "packages": {
+    "component": {
+      "archiveBytes": 1091774,
+      "archiveSha256": "33e18188ff0da8937125cdfa07153f213214873edf4f3c6a6f7d12fca0a99754",
+      "authenticatedRequest": false,
+      "readerExitCode": 0,
+      "readerSummary": {
+        "bootstrapIntervals": 136,
+        "centralPatternChecks": 4,
+        "cleanSacSnapshots": 10440,
+        "contrasts": 136,
+        "crossedIntervals": 14,
+        "holmFamilies": 5,
+        "independentScientificReplication": false,
+        "objectiveCalls": 0,
+        "recoveryChecks": 8,
+        "sameStateSnapshots": 6960,
+        "status": "passed",
+        "tableRowsExported": 136,
+        "trainingTransitions": 0
+      },
+      "tables": {
+        "cleanSac.csv": {
+          "rows": 28,
+          "sha256": "497d143ae38662bc06e170939e42b0f96acf07420f89c32512c87869b02dedc8"
+        },
+        "pulse.csv": {
+          "rows": 36,
+          "sha256": "e0f114b49023d710a5c8f8c35ca046c967ff42de23dc7c3c56b610ccac47666f"
+        },
+        "sameState.csv": {
+          "rows": 28,
+          "sha256": "f9c27cfcb89c2c45ee944091a4c474c390effd23488fbf3bad3999533b83e898"
+        },
+        "scalePrimary.csv": {
+          "rows": 20,
+          "sha256": "3c075f7c3323918ba34f6eb847e64e6760a7d01651b92b23b52491eb4da1b3e2"
+        },
+        "scaleSecondary.csv": {
+          "rows": 24,
+          "sha256": "f384cc41a986b04875e1f0032d4406c7ca05075059607ba23747aebc475ada45"
+        }
+      },
+      "url": "https://github.com/redeem123/PWA-component-evidence/releases/download/component-evidence-v2/portable_component_evidence_v2.zip"
+    },
+    "native": {
+      "archiveBytes": 518940,
+      "archiveSha256": "ee3349ee41904a5444dc4c42a75fa0752ccc0b3e8b6f461f4e017f90736ae823",
+      "authenticatedRequest": false,
+      "readerExitCode": 0,
+      "readerSummary": {
+        "actorStrata": 18,
+        "aggregateCurvePoints": 2400,
+        "aggregateCurves": 6,
+        "contrasts": 6,
+        "endpoints": 5220,
+        "functionEffects": 174,
+        "holmFamilies": 2,
+        "independentScientificReplication": false,
+        "objectiveCalls": 0,
+        "pairedTriplets": 1740,
+        "publicRawTrajectoryReplay": false,
+        "schema": "pwa-native-search-verification-v1",
+        "scientificFits": 0,
+        "trainingTransitions": 0
+      },
+      "tables": {
+        "actors.csv": {
+          "rows": 18,
+          "sha256": "f64ba25722e99808a9ea9a86995776c0e342ba2bf02bec8635254c7d2f560220"
+        },
+        "aggregate_curves.csv": {
+          "rows": 2400,
+          "sha256": "763ceb96f7474edb8f3e2b8e67f9ef0d512abe88df01f5f64c2a85daf67d0fe4"
+        },
+        "comparisons.csv": {
+          "rows": 6,
+          "sha256": "2a95854253d1812bc06d80688b6d92eb829f992432f3070be6ece545c7a4211d"
+        },
+        "endpoints.csv": {
+          "rows": 5220,
+          "sha256": "65c7ce500ef9c64774213f96e1dfce1e3d0a6c2ac6324e1723ebe81d62696f1c"
+        },
+        "functions.csv": {
+          "rows": 174,
+          "sha256": "0945973a919a1ba00d2f8d8c6583090533fbf7dfe883048a42a4bacea1266426"
+        }
+      },
+      "url": "https://github.com/redeem123/PWA-component-evidence/releases/download/native-search-evidence-v1/portable_native_search_evidence_v1.zip"
+    },
+    "terminal": {
+      "archiveBytes": 51175,
+      "archiveSha256": "6948c591c791a570f1abe399537f90ed736556880083860a5942d7dee893e983",
+      "authenticatedRequest": false,
+      "readerExitCode": 0,
+      "readerSummary": {
+        "failedCategoryChecks": 4,
+        "favorable": 326,
+        "harmful": 390,
+        "heldOutCategories": 4,
+        "independentScientificReplication": false,
+        "labels": 1160,
+        "menus": 290,
+        "noMotionChange": 34,
+        "objectiveCalls": 0,
+        "oppositeSigns": 101,
+        "scientificFits": 0,
+        "status": "passed",
+        "tableRowsExported": {
+          "held_out_decisions.csv": 290,
+          "terminal_credit_concordance.csv": 9,
+          "terminal_label_strata.csv": 10,
+          "terminal_labels.csv": 1160,
+          "terminal_screen_categories.csv": 4,
+          "terminal_screen_functions.csv": 29,
+          "terminal_screen_overall.csv": 1,
+          "terminal_screen_strata.csv": 10
+        },
+        "trainingTransitions": 0,
+        "zero": 444
+      },
+      "tables": {
+        "held_out_decisions.csv": {
+          "rows": 290,
+          "sha256": "a229771a2691ae8c6c58e0f2e0f59b0d6d347e156e2cb09a96d41360b9bb53af"
+        },
+        "terminal_credit_concordance.csv": {
+          "rows": 9,
+          "sha256": "9af9fa45c33ce89e1f041a1c4f30c3dd94e7d6a15439dcff73c5656d18125162"
+        },
+        "terminal_label_strata.csv": {
+          "rows": 10,
+          "sha256": "25a07104a57639f1992df145347da7cb4a2dde955c233d919db5c1b8fc04161c"
+        },
+        "terminal_labels.csv": {
+          "rows": 1160,
+          "sha256": "11aa168d651e86c3b412d20f59a89aeb944da27d541417d6b4b780957b947356"
+        },
+        "terminal_screen_categories.csv": {
+          "rows": 4,
+          "sha256": "c1195e7435c023eafe84d46aae78f10b4570e5ce02587c9c8542773e457923ee"
+        },
+        "terminal_screen_functions.csv": {
+          "rows": 29,
+          "sha256": "fa1e2d1b4b0b615d1a8540cf88b7ac178f4b09a1032600a611a218d86823725d"
+        },
+        "terminal_screen_overall.csv": {
+          "rows": 1,
+          "sha256": "2941dbd392f97dffafb9f90caa67200013c219deab352fd11100388c8ef06627"
+        },
+        "terminal_screen_strata.csv": {
+          "rows": 10,
+          "sha256": "6e2a28be66bc987e21b068c4994ad1b1f12dc753479c739faab9f26ec5795906"
+        }
+      },
+      "url": "https://github.com/redeem123/PWA-component-evidence/releases/download/terminal-credit-evidence-v1/portable_terminal_credit_evidence_v1.zip"
+    }
+  },
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "privateCheckout": false,
+  "publicCommit": "8c705ce1fffe68a2398a71027bbbde80de28a29e",
+  "python": "3.12.3",
+  "runAttempt": "1",
+  "runId": "36853502868",
+  "runUrl": "https://github.com/redeem123/PWA-component-evidence/actions/runs/36853502868",
+  "schema": "pwa-public-hosted-reader-verification-v1",
+  "scientificFits": 0,
+  "status": "passed",
+  "trainingTransitions": 0,
+  "verificationHost": "GitHub-hosted Ubuntu 24.04 x86_64",
+  "githubRun": {
+    "conclusion": "success",
+    "created_at": "2026-10-01T11:08:35Z",
+    "event": "workflow_dispatch",
+    "head_sha": "8c705ce1fffe68a2398a71027bbbde80de28a29e",
+    "html_url": "https://github.com/redeem123/PWA-component-evidence/actions/runs/36853502868",
+    "id": 36853502868,
+    "path": ".github/workflows/verify-statistical-evidence.yml",
+    "run_attempt": 1,
+    "status": "completed",
+    "updated_at": "2026-10-01T11:08:53Z"
+  },
+  "runnerImage": "ubuntu-24.04",
+  "runnerImageVersion": "20260920.314.1",
+  "ubuntuVersion": "24.04.5",
+  "localTableComparison": {
+    "rowMembership": "identical in all 18 exports",
+    "byteIdenticalTables": [
+      "component/cleanSac.csv",
+      "component/pulse.csv",
+      "component/sameState.csv",
+      "component/scalePrimary.csv",
+      "component/scaleSecondary.csv",
+      "native/aggregate_curves.csv",
+      "native/endpoints.csv",
+      "terminal/held_out_decisions.csv",
+      "terminal/terminal_credit_concordance.csv",
+      "terminal/terminal_label_strata.csv",
+      "terminal/terminal_labels.csv",
+      "terminal/terminal_screen_categories.csv",
+      "terminal/terminal_screen_functions.csv",
+      "terminal/terminal_screen_overall.csv",
+      "terminal/terminal_screen_strata.csv"
+    ],
+    "nonByteIdenticalTables": [
+      "native/actors.csv",
+      "native/comparisons.csv",
+      "native/functions.csv"
+    ],
+    "numericalAgreement": "All reconstructed native statistics passed the published reader's unchanged 1e-12 absolute/relative tolerance and exact discrete-field checks; byte identity is not claimed for three native derived tables"
+  }
+}
