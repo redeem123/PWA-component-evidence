@@ -14,9 +14,9 @@ qualification, reservation or completion of reviewer MC4.
 The [source qualification](SOURCE_QUALIFICATION.json) now records all 359
 executed synthetic checks and the assembled 43-member helper bundle. The
 separate policy, ledger, capture integration, transport and archive adapters
-retain the v2 acceptance rule. Author admission must still replay the
-original 9,120-call accounting and terminal-worker gates and acquire the original
-permanent shared claim. The proposed 32 fixture and 500 routing calls remain one
+retain the v2 acceptance rule. The actual author admission replayed the
+original 9,120-call accounting and terminal-worker gates and acquired the original
+permanent shared claim. The completed 32 fixture and 500 routing calls use one
 total allowance across both numerical versions. No training, retries or replacement
 states are allowed. Actual and archived pbest decisions, including all changes,
 must be reported rather than forcing equality of near-tie decisions.
@@ -34,3 +34,5 @@ derives the fixed plan and joins the complete relocated capture and ledger.
 It retains all 532 raw comparisons and six effects without importing a scientific
 runtime or executing an objective. Its 34 tests are separate from the original
 359-check executor qualification and do not alter its frozen source binding.
+The [public verification record](PUBLIC_VERIFICATION.json) includes the successful
+anonymous Mac retrieval and separate fresh Linux read-only reconstruction.

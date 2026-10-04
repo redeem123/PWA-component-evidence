@@ -94,3 +94,13 @@ for the declared subset. It does not regenerate the 29-function bridge effects,
 its continuations or the complete optimizer study, and it is not an independent
 team's replication. Read-only archive consistency, authenticated hosted execution
 and a future user's fresh independent measurement are distinct claims.
+
+The [separate fresh Linux reader check](https://github.com/redeem123/PWA-component-evidence/actions/runs/37178357275)
+downloads the source, raw-result and reader assets without authentication and
+reconstructs the complete report without a private checkout or native runtime.
+It finishes at 04:54:54 UTC. The downloaded report equals the Mac read-only
+report bytewise, digest
+`ac391671448b603a93981f3c05007be571b00595a900f4b401e48b233efe14a7`.
+It makes zero additional objective calls. The structured
+[public verification record](PUBLIC_VERIFICATION.json) separates this reader
+check from the earlier 532-call native measurement.
