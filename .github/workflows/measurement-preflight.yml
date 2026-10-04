@@ -21,9 +21,11 @@ jobs:
       - name: Install prescribed CPU wheels
         shell: bash
         run: |
+          mkdir -p "$RUNNER_TEMP/pwa-measurement-setup"
           python -m venv "$RUNNER_TEMP/pwa-measurement-env"
-          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --only-binary=:all: --index-url https://download.pytorch.org/whl/cpu 'https://download.pytorch.org/whl/cpu/torch-2.11.0%2Bcpu-cp310-cp310-manylinux_2_28_x86_64.whl#sha256=f378df648bf7fb94bbc820dfec37d3d346bd1703c692a2215edebf6edcef8b75'
-          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --only-binary=:all: 'https://files.pythonhosted.org/packages/b4/63/3de6a34ad7ad6646ac7d2f55ebc6ad439dbbf9c4370017c50cf403fb19b5/numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=fc7b73d02efb0e18c000e9ad8b83480dfcd5dfd11065997ed4c6747470ae8915' 'https://files.pythonhosted.org/packages/ab/a8/2c41db714e0d83f51e3cec654da6b7d53718de2180c8041aaa7eb82d2431/coco_experiment-2.8.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl#sha256=39da2b14a7bd23890152fdc2a89253e89b0c832237ca0e4c1dba5293fdffa954'
+          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --no-deps 'https://files.pythonhosted.org/packages/f3/6e/1736e5b4ae2b778ef2f81c47d797de9f891d4d8acb047a24ca37a60294dd/pip-26.2.1-py3-none-any.whl#sha256=71138adf1f4ca900cdb7d289c21b7494329f2332b6d85f0e1c42108c0384ed3e' 2>&1 | tee "$RUNNER_TEMP/pwa-measurement-setup/pip.log"
+          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --only-binary=:all: --index-url https://pypi.org/simple 'https://download.pytorch.org/whl/cpu/torch-2.11.0%2Bcpu-cp310-cp310-manylinux_2_28_x86_64.whl#sha256=f378df648bf7fb94bbc820dfec37d3d346bd1703c692a2215edebf6edcef8b75' 2>&1 | tee "$RUNNER_TEMP/pwa-measurement-setup/torch.log"
+          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --only-binary=:all: 'https://files.pythonhosted.org/packages/b4/63/3de6a34ad7ad6646ac7d2f55ebc6ad439dbbf9c4370017c50cf403fb19b5/numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=fc7b73d02efb0e18c000e9ad8b83480dfcd5dfd11065997ed4c6747470ae8915' 'https://files.pythonhosted.org/packages/ab/a8/2c41db714e0d83f51e3cec654da6b7d53718de2180c8041aaa7eb82d2431/coco_experiment-2.8.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl#sha256=39da2b14a7bd23890152fdc2a89253e89b0c832237ca0e4c1dba5293fdffa954' 2>&1 | tee "$RUNNER_TEMP/pwa-measurement-setup/numpy-coco.log"
       - name: Retrieve and verify helper from the public workflow commit
         shell: bash
         run: |
@@ -47,6 +49,8 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: supplied-state-linux-preflight-${{ github.run_id }}
-          path: ${{ runner.temp }}/pwa-measurement-preflight
+          path: |
+            ${{ runner.temp }}/pwa-measurement-setup
+            ${{ runner.temp }}/pwa-measurement-preflight
           if-no-files-found: error
           retention-days: 30
