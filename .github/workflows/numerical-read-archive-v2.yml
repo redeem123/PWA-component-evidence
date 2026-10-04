@@ -1,0 +1,63 @@
+name: Read the completed numerical measurement without native execution
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  read:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Retrieve the three pinned public files and reconstruct raw effects
+        shell: bash
+        run: |
+          python3 -I -B - <<'PY'
+          import hashlib, json, pathlib, runpy, stat, subprocess, sys, urllib.request, zipfile
+          root = pathlib.Path.cwd() / 'measurement-reader'
+          root.mkdir()
+          base = 'https://github.com/redeem123/PWA-component-evidence/releases/download/numerical-native532-v2/'
+          records = (
+              ('PWA-numerical-source-v2.zip', 658954, '3c4e8bb25fe03de10c6b1507c5a3431f4a98eb8ef5d1e536635d91e061c3f872', 'source', 43),
+              ('native-v2-result-37176415222-hosted.zip', 4188176, '1f09758956fa6236643e9fc50e7903832be85f8b00842620037795ec22d2cdcc', 'measurement', 24),
+              ('read_measurement.py', 26785, 'e474d1fbdf42682435a35936bd39db32f719fc8edb3d97639390ed77f79cac6b', None, None),
+          )
+          for name, size, digest, destination, count in records:
+              with urllib.request.urlopen(base + name, timeout=90) as response:
+                  raw = response.read(size + 1)
+              assert len(raw) == size and hashlib.sha256(raw).hexdigest() == digest
+              path = root / name
+              with path.open('xb') as stream:
+                  stream.write(raw)
+              if destination is not None:
+                  with zipfile.ZipFile(path) as archive:
+                      members = archive.infolist()
+                      assert len(members) == len({x.filename for x in members}) == count
+                      assert sum(x.file_size for x in members) < 32 * 1024**2
+                      for item in members:
+                          p = pathlib.PurePosixPath(item.filename)
+                          assert not p.is_absolute() and '..' not in p.parts and not item.is_dir()
+                          assert not stat.S_ISLNK(item.external_attr >> 16)
+                      archive.extractall(root / destination)
+          command = [sys.executable, '-I', '-B', str(root / 'read_measurement.py'),
+                     '--source-root', str(root / 'source'),
+                     '--measurement-root', str(root / 'measurement/pwa-v2-source'),
+                     '--trusted-reservation-sha256', '3a9ae16b23e4f6e982dd4cd7193d8c383f3a8f5c3f530e187991534ca5ab76d1']
+          with (root / 'reader.stdout.json').open('xb') as out, (root / 'reader.stderr.log').open('xb') as err:
+              process = subprocess.run(command, stdout=out, stderr=err, timeout=120)
+          assert process.returncode == 0
+          raw = (root / 'reader.stdout.json').read_bytes()
+          assert hashlib.sha256(raw).hexdigest() == 'ac391671448b603a93981f3c05007be571b00595a900f4b401e48b233efe14a7'
+          report = json.loads(raw)
+          assert report['status'] == 'archive-consistent' and len(report['rawComparisons']) == 532
+          assert report['newObjectiveCalls'] == report['trainingTransitions'] == 0
+          assert report['nativeExecutionVerified'] is report['authorizationVerified'] is False
+          print('Pinned anonymous read-only reconstruction passed. New objective calls 0.')
+          PY
+      - name: Retain downloaded bytes and read-only verification outputs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: numerical-measurement-read-${{ github.run_id }}-${{ github.run_attempt }}
+          path: measurement-reader
+          if-no-files-found: error
+          retention-days: 90

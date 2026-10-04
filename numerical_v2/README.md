@@ -21,5 +21,16 @@ total allowance across both numerical versions. No training, retries or replacem
 states are allowed. Actual and archived pbest decisions, including all changes,
 must be reported rather than forcing equality of near-tie decisions.
 
-No new objective evaluations or author allocation have been performed at this
-stage. The paper's current native-replay limitation therefore remains valid.
+The [completed native measurement](RUN_STATUS.md) now records the single hosted
+execution. All 32 fixture and 500 routing evaluations completed and their raw
+ledger/capture join passed again after relocation. The original shared author
+claim is permanently occupied. Do not launch this allocation again.
+The result concerns one supplied state, not regeneration of the complete bridge
+or independent-team replication. The original v1 exact-input failure remains.
+
+The [release instructions](RELEASE_NOTES.md) give the three anonymous downloads,
+external hashes and one read-only command. `read_measurement.py` independently
+derives the fixed plan and joins the complete relocated capture and ledger.
+It retains all 532 raw comparisons and six effects without importing a scientific
+runtime or executing an objective. Its 34 tests are separate from the original
+359-check executor qualification and do not alter its frozen source binding.
