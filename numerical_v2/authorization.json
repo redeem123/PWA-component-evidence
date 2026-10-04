@@ -1,0 +1,21 @@
+{
+  "schema": "mc4-numerical-replay-amendment-human-authorization-v2",
+  "authorizationId": "mc4-linux532-numerical-v2-20261004",
+  "approved": true,
+  "permissionEvidence": "Direct user message 'tooi duyeetj' in thread 01a024b6-0729-70e2-ae60-e69d09bcad17, following the explicit request to authorize a separate numerical v2 contract with pre-measurement arithmetic error bounds, the same checkpoint, state, five arms and 532-call ceiling.",
+  "priorAuthoritySha256": "4ae5aa98d4baa7b3d7eeffa8883be3adb74c47c06cdeb147e178f32ee59d8276",
+  "publicCheckpointStateAccessAllowed": true,
+  "externalLinuxExecutionAllowed": true,
+  "numericalAmendmentAllowed": true,
+  "maximumFreshCallsAcrossBothVersions": 532,
+  "freshCallsAlreadyUsed": 0,
+  "sameCheckpointRequired": true,
+  "sameSavedStateRequired": true,
+  "sameFiveArmsRequired": true,
+  "sharedOriginalAuthorClaimRequired": true,
+  "retriesAllowed": false,
+  "trainingAllowed": false,
+  "caseSelectionAllowed": false,
+  "frozenV1MutationAllowed": false,
+  "journalSubmissionAllowed": false
+}

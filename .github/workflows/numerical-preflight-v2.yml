@@ -1,0 +1,71 @@
+name: Supplied-state numerical contract v2 (no objectives)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      VECLIB_MAXIMUM_THREADS: '1'
+      NUMEXPR_NUM_THREADS: '1'
+      BLIS_NUM_THREADS: '1'
+      OMP_THREAD_LIMIT: '1'
+    steps:
+      - name: Install the prescribed Python version
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.10.19'
+      - name: Install prescribed CPU wheels
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/pwa-measurement-setup"
+          python -m venv "$RUNNER_TEMP/pwa-measurement-env"
+          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --no-deps 'https://files.pythonhosted.org/packages/f3/6e/1736e5b4ae2b778ef2f81c47d797de9f891d4d8acb047a24ca37a60294dd/pip-26.2.1-py3-none-any.whl#sha256=71138adf1f4ca900cdb7d289c21b7494329f2332b6d85f0e1c42108c0384ed3e' 2>&1 | tee "$RUNNER_TEMP/pwa-measurement-setup/pip.log"
+          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --only-binary=:all: --index-url https://pypi.org/simple 'https://download.pytorch.org/whl/cpu/torch-2.11.0%2Bcpu-cp310-cp310-manylinux_2_28_x86_64.whl#sha256=f378df648bf7fb94bbc820dfec37d3d346bd1703c692a2215edebf6edcef8b75' 2>&1 | tee "$RUNNER_TEMP/pwa-measurement-setup/torch.log"
+          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -m pip install --disable-pip-version-check --no-cache-dir --only-binary=:all: 'https://files.pythonhosted.org/packages/b4/63/3de6a34ad7ad6646ac7d2f55ebc6ad439dbbf9c4370017c50cf403fb19b5/numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl#sha256=fc7b73d02efb0e18c000e9ad8b83480dfcd5dfd11065997ed4c6747470ae8915' 'https://files.pythonhosted.org/packages/ab/a8/2c41db714e0d83f51e3cec654da6b7d53718de2180c8041aaa7eb82d2431/coco_experiment-2.8.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl#sha256=39da2b14a7bd23890152fdc2a89253e89b0c832237ca0e4c1dba5293fdffa954' 2>&1 | tee "$RUNNER_TEMP/pwa-measurement-setup/numpy-coco.log"
+      - name: Retrieve exact public inspection and v2 sources
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, os, pathlib, urllib.request
+          assert os.environ['GITHUB_REPOSITORY'] == 'redeem123/PWA-component-evidence'
+          root = pathlib.Path(os.environ['RUNNER_TEMP'])
+          sources = {
+              'verify_measurement_preflight.py': '3849db63e811b8d402f61ed718e70b2a1dd4ed9e5e070915eaa817868173cacc',
+              'numerical_v2/contract.py': '3e7e42bccdafc1f53fe6f45756431cfc64d22456a282c87d22dedb2712ec9341',
+              'numerical_v2/geometry.py': '28923a5cef8e8f93d8d77c0b7e8dbc871b4a79144af4faa8c2cea192dbda5791',
+              'numerical_v2/preflight.py': '36a7a783b8f3dac09c78f290d3ab6ebf36e02f4fd280052c66d9ca01c0e0bad9',
+          }
+          for name, expected in sources.items():
+              url = 'https://raw.githubusercontent.com/' + os.environ['GITHUB_REPOSITORY'] + '/' + os.environ['GITHUB_SHA'] + '/' + name
+              with urllib.request.urlopen(url, timeout=60) as response:
+                  raw = response.read(100001)
+              assert len(raw) <= 100000 and hashlib.sha256(raw).hexdigest() == expected
+              output = root / name
+              output.parent.mkdir(parents=True, exist_ok=True)
+              with output.open('xb') as stream:
+                  stream.write(raw)
+          PY
+      - name: Inspect the unchanged anonymous package
+        shell: bash
+        run: |
+          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -I -B "$RUNNER_TEMP/verify_measurement_preflight.py" --output "$RUNNER_TEMP/pwa-measurement-preflight"
+      - name: Compute the actual v2 actor and motion (no admission)
+        shell: bash
+        run: |
+          "$RUNNER_TEMP/pwa-measurement-env/bin/python" -I -B "$RUNNER_TEMP/numerical_v2/preflight.py" --package "$RUNNER_TEMP/pwa-measurement-preflight/package" --output "$RUNNER_TEMP/pwa-measurement-preflight/numerical-v2.json" > "$RUNNER_TEMP/pwa-measurement-preflight/numerical-v2.stdout.log" 2> "$RUNNER_TEMP/pwa-measurement-preflight/numerical-v2.stderr.log"
+      - name: Preserve actual computation or failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: supplied-state-numerical-v2-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/pwa-measurement-setup
+            ${{ runner.temp }}/pwa-measurement-preflight
+          if-no-files-found: error
+          retention-days: 30
